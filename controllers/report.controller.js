@@ -25,7 +25,7 @@ export const addReport = async (req, res) => {
 
     const savedReport = await newReport.save();
     res.status(201).json(savedReport);
-
+    console.log("New report added:", savedReport);
   } catch (error) {
     console.error("Error in addReport controller:", error.message);
     res.status(500).json({ message: "Internal Server Error" });
@@ -55,6 +55,7 @@ export const getReports = async (req, res) => {
       .lean();
 
     res.status(200).json(reports);
+    console.log("Reports retrieved successfully:", reports.length);
   } catch (error) {
     console.error("Error in getReports controller:", error.message);
     res.status(500).json({ message: "Internal Server Error" });
@@ -74,6 +75,7 @@ export const getReportById = async (req, res) => {
     }
 
     res.status(200).json(report);
+    console.log("Report retrieved successfully:", report._id);
   } catch (error) {
     console.error("Error in getReportById controller:", error.message);
     res.status(500).json({ message: "Internal Server Error" });
@@ -104,7 +106,7 @@ export const updateReport = async (req, res) => {
 
     const updatedReport = await report.save();
     res.status(200).json(updatedReport);
-
+    console.log("Report updated successfully:", updatedReport._id);
   } catch (error) {
     console.error("Error in updateReport controller:", error.message);
     res.status(500).json({ message: "Internal Server Error" });
@@ -124,6 +126,7 @@ export const deleteReport = async (req, res) => {
     }
 
     res.status(200).json({ message: "Report deleted successfully" });
+    console.log("Report deleted successfully:", req.params.id);
   } catch (error) {
     console.error("Error in deleteReport controller:", error.message);
     res.status(500).json({ message: "Internal Server Error" });

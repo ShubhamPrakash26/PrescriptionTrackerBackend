@@ -13,6 +13,7 @@ export const getProfile = async (req, res) => {
       return res.status(404).json({ message: "User not found" });
     }
     res.status(200).json(user);
+    console.log("User profile retrieved successfully:", user._id);
   } catch (error) {
     console.error("Error in getProfile controller:", error.message);
     res.status(500).json({ message: "Internal Server Error" });
@@ -53,6 +54,7 @@ export const updateProfile = async (req, res) => {
       dob: updatedUser.dob,
       createdAt: updatedUser.createdAt
     });
+    console.log("User profile updated successfully:", updatedUser._id);
   } catch (error) {
     console.error("Error in updateProfile controller:", error.message);
     res.status(500).json({ message: "Internal Server Error" });
@@ -79,6 +81,7 @@ export const getDashboardSummary = async (req, res) => {
         bloodGroup: req.user.bloodGroup
       }
     });
+    console.log("Dashboard summary retrieved successfully for user:", req.user._id);
   } catch (error) {
     console.error("Error in getDashboardSummary controller:", error.message);
     res.status(500).json({ message: "Internal Server Error" });
@@ -98,7 +101,7 @@ export const updateProfileImage = async (req, res) => {
 
     user.profilePic = profilePic;
     await user.save();
-
+    console.log("Profile picture updated successfully for user:", userId);
     return res.status(200).json({ message: "Profile picture updated successfully" });
   } catch (error) {
     console.error("❌ Error updating profile image:", error);

@@ -24,6 +24,7 @@ export const addMember = async (req, res) => {
 
     const savedMember = await newMember.save();
     res.status(201).json(savedMember);
+    console.log("New member added:", savedMember);
   } catch (error) {
     console.error("Error in addMember controller:", error.message);
     res.status(500).json({ message: "Internal Server Error" });
@@ -35,6 +36,7 @@ export const getMembers = async (req, res) => {
   try {
     const members = await Member.find({ userId: req.user._id });
     res.status(200).json(members);
+    console.log("Members retrieved successfully:", members.length);
   } catch (error) {
     console.error("Error in getMembers controller:", error.message);
     res.status(500).json({ message: "Internal Server Error" });
@@ -52,6 +54,7 @@ export const getMemberById = async (req, res) => {
       return res.status(404).json({ message: "Member not found" });
     }
     res.status(200).json(member);
+    console.log("Member retrieved successfully:", member);
   } catch (error) {
     console.error("Error in getMemberById controller:", error.message);
     res.status(500).json({ message: "Internal Server Error" });
@@ -79,6 +82,7 @@ export const updateMember = async (req, res) => {
 
     const updatedMember = await member.save();
     res.status(200).json(updatedMember);
+    console.log("Member updated successfully:", updatedMember);
   } catch (error) {
     console.error("Error in updateMember controller:", error.message);
     res.status(500).json({ message: "Internal Server Error" });
@@ -112,6 +116,7 @@ export const deleteMember = async (req, res) => {
     }
 
     return res.status(200).json({ message: "Member deleted successfully" });
+    console.log("Member deleted successfully:", id);
   } catch (error) {
     console.error("Error in deleteMember controller:", error.message);
     return res.status(500).json({ message: "Internal Server Error" });

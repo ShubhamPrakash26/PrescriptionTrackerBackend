@@ -34,6 +34,7 @@ export const addPrescription = async (req, res) => {
 
     const savedPrescription = await newPrescription.save();
     res.status(201).json(savedPrescription);
+    console.log("New prescription added:", savedPrescription);
   } catch (error) {
     console.error("Error in addPrescription controller:", error.message);
     res.status(500).json({ message: "Internal Server Error" });
@@ -62,6 +63,7 @@ export const getPrescriptions = async (req, res) => {
       .lean();
 
     res.status(200).json(prescriptions);
+    console.log("Prescriptions retrieved successfully:", prescriptions.length);
   } catch (error) {
     console.error("Error in getPrescriptions controller:", error.message);
     res.status(500).json({ message: "Internal Server Error" });
@@ -80,6 +82,7 @@ export const getPrescriptionById = async (req, res) => {
     }
 
     res.status(200).json(prescription);
+    console.log("Prescription retrieved successfully:", prescription._id);
   } catch (error) {
     console.error("Error in getPrescriptionById controller:", error.message);
     res.status(500).json({ message: "Internal Server Error" });
@@ -115,7 +118,7 @@ export const updatePrescription = async (req, res) => {
 
     const updatedPrescription = await prescription.save();
     res.status(200).json(updatedPrescription);
-
+    console.log("Prescription updated successfully:", updatedPrescription._id);
   } catch (error) {
     console.error("Error in updatePrescription controller:", error.message);
     res.status(500).json({ message: "Internal Server Error" });
@@ -134,6 +137,7 @@ export const deletePrescription = async (req, res) => {
     }
 
     res.status(200).json({ message: "Prescription deleted successfully" });
+    console.log("Prescription deleted successfully:", req.params.id);
   } catch (error) {
     console.error("Error in deletePrescription controller:", error.message);
     res.status(500).json({ message: "Internal Server Error" });
@@ -166,7 +170,7 @@ export const downloadPrescription = async (req, res) => {
     res.setHeader('Content-Disposition', `attachment; filename="${prescription.title}.pdf"`);
     
     res.send(pdfBuffer);
-
+    console.log("Prescription PDF downloaded successfully:", prescription._id);
   } catch (error) {
     console.error("Error in downloadPrescription controller:", error.message);
     res.status(500).json({ message: "Internal Server Error" });
