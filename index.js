@@ -26,7 +26,7 @@ app.use(
   cors({
   origin: [
     "http://localhost:5173",           // dev
-    "https://yourfrontend.smartasp.net" // prod (replace this)
+    "http://vipasyanadoc-001-site18.ktempurl.com/" // prod (replace this)
   ],
   credentials: true
 })
