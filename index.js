@@ -23,10 +23,10 @@ app.use(cookieParser());
 
 // Enable CORS
 app.use(
-  cors({
-    origin: "http://localhost:5173",
-    credentials: true,
-  })
+  origin: [
+    "http://localhost:5173",           // dev
+    "https://yourfrontend.smartasp.net" // prod (replace this)
+  ],
 );
 
 // Serve uploaded files statically
