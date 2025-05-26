@@ -21,13 +21,16 @@ const PORT = process.env.PORT || 5000;
 app.use(express.json({ limit: "10mb" }));
 app.use(cookieParser());
 
+const allowedOrigins = [
+  "http://vipasyanadoc-001-site18.ktempurl.com",         // prod
+  "http://localhost:3000",                   
+  "http://localhost:5173",           // dev
+];
+
 // Enable CORS
 app.use(
   cors({
-  origin: [
-    "http://localhost:5173",           // dev
-    "http://vipasyanadoc-001-site18.ktempurl.com/" // prod (replace this)
-  ],
+  origin: allowedOrigins,
   credentials: true
 })
 );
