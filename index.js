@@ -17,9 +17,6 @@ dotenv.config();
 const app = express();
 const PORT = process.env.PORT || 5000;
 
-// Enable JSON parsing and cookies
-app.use(express.json({ limit: "10mb" }));
-app.use(cookieParser());
 
 const allowedOrigins = [
   "http://vipasyanadoc-001-site18.ktempurl.com",         // prod
@@ -34,6 +31,10 @@ app.use(
   credentials: true
 })
 );
+
+// Enable JSON parsing and cookies
+app.use(express.json({ limit: "10mb" }));
+app.use(cookieParser());
 
 // Serve uploaded files statically
 const __filename = fileURLToPath(import.meta.url);
@@ -51,7 +52,7 @@ const startServer = async () => {
   try {
     await connectDB();
     app.listen(PORT, () => {
-      console.log(`Server running at http://localhost:${PORT}`);
+      console.log(`Server running at ${PORT}`);
     });
   } catch (error) {
     console.error("Server start failed:", error.message);
